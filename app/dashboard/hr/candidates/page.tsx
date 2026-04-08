@@ -13,10 +13,10 @@ import { actionsColumn } from "@components/dashboard/actionsColumn";
 import FormModal from "@components/dashboard/FormModal";
 import DeleteConfirmModal from "@/components/common/DeleteConfirmModal";
 
-import { CandidateService } from "@/services/candidateService";
-import { CandidateRead, CandidateWrite } from "@/types/candidates";
-import { candidateFormFields } from "@/schemas/formSchemas/candidateForm";
-import { candidateColumns } from "@/schemas/tableSchemas/candidateColumns";
+import { CandidateService } from "@/modules/hr/services/candidateService";
+import { CandidateRead, CandidateWrite } from "@/modules/hr/types/candidates";
+import { candidateFormFields } from "@/modules/hr/schemas/formSchemas/candidateForm";
+import { candidateColumns } from "@/modules/hr/schemas/tableSchemas/candidateColumns";
 import { validateFile } from "@/helpers/fileValidation";
 
 ModuleRegistry.registerModules([AllCommunityModule]);

@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/lib/network";
-import {AttendanceWrite , AttendanceRead} from "@/types/attendance";
+import { AttendanceWrite, AttendanceRead } from "@/modules/hr/types/attendance";
 
 export const AttendanceService = {
     getAttendance: async () => {
@@ -18,7 +18,7 @@ export const AttendanceService = {
         } catch (error) {
             console.error(`Error fetching attendance with ID ${id}:`, error);
             throw error;
-        }   
+        }
     },
     createAttendance: async (data: AttendanceWrite) => {
         try {
@@ -30,13 +30,13 @@ export const AttendanceService = {
         }
     },
     updateAttendance: async (id: string, data: AttendanceWrite) => {
-    try {
+        try {
             const response = await axiosInstance.put(`hr/attendance/${id}/`, data);
             return response.data;
         } catch (error) {
             console.error(`Error updating attendance with ID ${id}:`, error);
             throw error;
-        }   
+        }
     },
     deleteAttendance: async (id: string) => {
         try {

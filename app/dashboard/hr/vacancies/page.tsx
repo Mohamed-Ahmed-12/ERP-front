@@ -13,10 +13,10 @@ import { actionsColumn } from "@components/dashboard/actionsColumn";
 import FormModal from "@components/dashboard/FormModal";
 import DeleteConfirmModal from "@/components/common/DeleteConfirmModal";
 
-import { VacancyService } from "@/services/vacancyService";
-import { VacancyRead, VacancyWrite } from "@/types/vacancies";
-import { vacancyFormFields } from "@/schemas/formSchemas/vacancyForm";
-import { vacancyColumns } from "@/schemas/tableSchemas/vacancyColumns";
+import { VacancyService } from "@/modules/hr/services/vacancyService";
+import { VacancyRead, VacancyWrite } from "@/modules/hr/types/vacancies";
+import { vacancyFormFields } from "@/modules/hr/schemas/formSchemas/vacancyForm";
+import { vacancyColumns } from "@/modules/hr/schemas/tableSchemas/vacancyColumns";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -55,7 +55,7 @@ export default function VacanciesPage() {
     }, [editingVacancy]);
 
     const handleSubmit = async (payload: any) => {
-        console.log("data"  ,payload)
+        console.log("data", payload)
         const position = typeof payload.position === 'object'
             ? payload.position.guid
             : payload.position;

@@ -3,16 +3,16 @@
 import React, { useMemo, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
-import {Department} from "@/types/department";
+import { Department } from "@/modules/hr/types/department";
 import { RowSelectionOptions } from 'ag-grid-community';
 import { Spinner, Button } from "flowbite-react";
 import { toast } from "react-toastify";
 import PageHeader from "@/components/common/PageHeader";
 import { useFetch } from "@/hooks/useFetch";
 import { useAgGridFilter } from "@/hooks/useAgGridFilter";
-import { departmentColumns } from "@/schemas/tableSchemas/departmentColumns";
-import { departmentFormFields } from "@/schemas/formSchemas/departmentForm";
-import { DepartmentService } from "@/services/departmentService";
+import { departmentColumns } from "@/modules/hr/schemas/tableSchemas/departmentColumns";
+import { departmentFormFields } from "@/modules/hr/schemas/formSchemas/departmentForm";
+import { DepartmentService } from "@/modules/hr/services/departmentService";
 import { actionsColumn } from "@components/dashboard/actionsColumn";
 import FormModal from "@components/dashboard/FormModal";
 import DeleteConfirmModal from "@/components/common/DeleteConfirmModal";
@@ -100,7 +100,7 @@ export default function DepartmentsPage() {
 
     // --- INLINE EDITING LOGIC ---
 
-   
+
 
     if (loading && rowData.length === 0) {
         return <div className="text-center pt-8"><Spinner size="xl" /> Loading Departments...</div>;

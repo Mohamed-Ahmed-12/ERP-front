@@ -48,7 +48,7 @@ export const candidateFormFields: FormFieldGroup[] = [
                 fieldType: 'file',
                 required: false,
                 placeholder: '',
-                helpTxt:"Max file size 2 MB"
+                helpTxt: "Max file size 2 MB"
             },
             {
                 id: 'cover_letter',

@@ -1,4 +1,4 @@
-import {Position} from "@/types/position";
+import { Position } from "@/modules/hr/types/position";
 import { ColDef } from "ag-grid-community";
 
 

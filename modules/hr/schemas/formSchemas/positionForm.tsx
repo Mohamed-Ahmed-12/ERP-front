@@ -5,7 +5,7 @@ export const positionFormFields: FormFieldGroup[] = [
         groupKey: 'g1',
         fields: [
             {
-                id:'seniority_level',
+                id: 'seniority_level',
                 label: 'Seniority Level',
                 fieldType: 'select',
                 helpTxt: '',
@@ -40,7 +40,7 @@ export const positionFormFields: FormFieldGroup[] = [
                 placeholder: '50000',
             },
             {
-                id:'department',
+                id: 'department',
                 label: 'Department',
                 fieldType: 'select',
                 helpTxt: '',
@@ -50,7 +50,7 @@ export const positionFormFields: FormFieldGroup[] = [
                 options: 'hr/departments/dropdown/' // API endpoint to fetch options
             },
             {
-                id:'contract_type',
+                id: 'contract_type',
                 label: 'Contract Type',
                 fieldType: 'select',
                 helpTxt: '',
@@ -63,7 +63,7 @@ export const positionFormFields: FormFieldGroup[] = [
                     { label: 'Contract', value: 'Contract' },
                 ])
             }
-            
+
         ]
     },
 ]

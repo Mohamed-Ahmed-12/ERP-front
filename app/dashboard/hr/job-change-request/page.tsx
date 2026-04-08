@@ -13,10 +13,10 @@ import { actionsColumn } from "@components/dashboard/actionsColumn";
 import FormModal from "@components/dashboard/FormModal";
 import DeleteConfirmModal from "@/components/common/DeleteConfirmModal";
 
-import { JobPositionChangeReqService } from "@/services/jobPositionChangeService";
-import { JobChangeRequestRead , JobChangeRequestWrite } from "@/types/jobChangeRequest";
-import { jobChangeRequestColumns } from "@/schemas/tableSchemas/jobChangeReqColumns";
-import { jobChangeReqFormFields } from "@/schemas/formSchemas/jobChangeReqForm";
+import { JobPositionChangeReqService } from "@/modules/hr/services/jobPositionChangeService";
+import { JobChangeRequestRead, JobChangeRequestWrite } from "@/modules/hr/types/jobChangeRequest";
+import { jobChangeRequestColumns } from "@/modules/hr/schemas/tableSchemas/jobChangeReqColumns";
+import { jobChangeReqFormFields } from "@/modules/hr/schemas/formSchemas/jobChangeReqForm";
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 export default function JobChangeReqPage() {
@@ -48,7 +48,7 @@ export default function JobChangeReqPage() {
 
         return {
             ...editingChangeReq,
-            
+
             current_position: editingChangeReq.current_position?.guid,
             desired_position: editingChangeReq.desired_position?.guid,
             employee: editingChangeReq.employee?.guid
@@ -56,7 +56,7 @@ export default function JobChangeReqPage() {
     }, [editingChangeReq]);
 
     const handleSubmit = async (payload: any) => {
-        console.log("data"  ,payload)
+        console.log("data", payload)
         const employee = typeof payload.employee === 'object'
             ? payload.employee.guid
             : payload.employee;
@@ -72,10 +72,10 @@ export default function JobChangeReqPage() {
         const normalizedPayload: JobChangeRequestWrite = {
             current_position: current_position,
             desired_position: desired_position,
-            employee:employee,
-            reason:payload.reason,
-            request_type:payload.request_type,
-            status:payload.status
+            employee: employee,
+            reason: payload.reason,
+            request_type: payload.request_type,
+            status: payload.status
         };
 
         try {

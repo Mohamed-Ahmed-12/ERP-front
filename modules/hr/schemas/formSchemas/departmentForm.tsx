@@ -22,7 +22,7 @@ export const departmentFormFields: FormFieldGroup[] = [
                 required: false,
                 placeholder: 'Software Department description',
             },
-            
+
         ]
     },
 ]

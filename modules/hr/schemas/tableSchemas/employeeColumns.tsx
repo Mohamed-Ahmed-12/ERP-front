@@ -1,4 +1,4 @@
-import {Employee} from "@/types/employees";
+import { Employee } from "@/modules/hr/types/employees";
 import { ColDef } from "ag-grid-community";
 
 

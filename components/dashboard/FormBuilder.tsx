@@ -6,7 +6,7 @@ import { FormBuilderProps, FormField, FormFieldGroup } from "@/types/formfield";
 import { DefaultValues, FieldValues, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { AxiosErrorWithData } from "@/types/error";
+import { AxiosErrorWithData } from "@/modules/hr/types/error";
 import { mapApiErrorsToFormFields } from "@/helpers/apis";
 
 interface FormBuilderPropsWithSubmit<TFormValues extends FieldValues> {
@@ -89,13 +89,12 @@ export default function FormBuilder<TFormValues extends FieldValues>({
                                     {/* Label row */}
                                     <label
                                         htmlFor={field.id}
-                                        className={`text-sm font-medium leading-none ${
-                                            isDisabled
-                                                ? "text-slate-400"
-                                                : errorMsg
+                                        className={`text-sm font-medium leading-none ${isDisabled
+                                            ? "text-slate-400"
+                                            : errorMsg
                                                 ? "text-red-600"
                                                 : "text-slate-700"
-                                        }`}
+                                            }`}
                                     >
                                         {field.label}
                                         {field.required && (

@@ -1,4 +1,4 @@
-import {JobChangeRequestRead} from "@/types/jobChangeRequest";
+import { JobChangeRequestRead } from "@/modules/hr/types/jobChangeRequest";
 import { ColDef } from "ag-grid-community";
 
 
@@ -11,5 +11,5 @@ export const jobChangeRequestColumns: (ColDef<JobChangeRequestRead>)[] = [
     { field: "desired_position.title", headerName: "New Position", flex: 1, filter: true },
     { field: "status", headerName: "Status", flex: 1, filter: true },
     { field: "request_type", headerName: "Type", flex: 1, filter: true },
-    
+
 ];

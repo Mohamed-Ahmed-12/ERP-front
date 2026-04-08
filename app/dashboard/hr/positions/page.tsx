@@ -9,13 +9,13 @@ import { toast } from "react-toastify";
 import PageHeader from "@/components/common/PageHeader";
 import { useFetch } from "@/hooks/useFetch";
 import { useAgGridFilter } from "@/hooks/useAgGridFilter";
-import { positionColumns } from "@/schemas/tableSchemas/positionColumns";
-import { positionFormFields } from "@/schemas/formSchemas/positionForm";
+import { positionColumns } from "@/modules/hr/schemas/tableSchemas/positionColumns";
+import { positionFormFields } from "@/modules/hr/schemas/formSchemas/positionForm";
 import { actionsColumn } from "@components/dashboard/actionsColumn";
 import FormModal from "@components/dashboard/FormModal";
 import DeleteConfirmModal from "@/components/common/DeleteConfirmModal";
-import { Position, PositionCreate } from "@/types/position";
-import { JobPositionService } from "@/services/positionService";
+import { Position, PositionCreate } from "@/modules/hr/types/position";
+import { JobPositionService } from "@/modules/hr/services/positionService";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -54,7 +54,7 @@ export default function JobPositionsPage() {
     }, [editingDepartment]);
 
     const handleSubmit = async (payload: any) => {
-        console.log("data"  ,payload)
+        console.log("data", payload)
         const departmentGuid = typeof payload.department === 'object'
             ? payload.department.guid
             : payload.department;
@@ -65,8 +65,8 @@ export default function JobPositionsPage() {
             base_salary: payload.base_salary,
             department: departmentGuid, // Send the string, not the object
             contract_type: payload.contract_type,
-            seniority_level : payload.seniority_level
-            
+            seniority_level: payload.seniority_level
+
         };
 
         try {

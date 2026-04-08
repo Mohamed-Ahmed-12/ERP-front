@@ -1,6 +1,6 @@
 // utils/errorMapping.ts
 
-import { ErrorData } from "@/types/error";
+import { ErrorData } from "@/modules/hr/types/error";
 import { FieldValues, UseFormSetError, Path } from "react-hook-form";
 
 /**
@@ -42,13 +42,13 @@ export const mapApiErrorsToFormFields = <TFormValues extends FieldValues>(
         // --- Calling setError ---
         // We must cast fieldName to Path<TFormValues> to satisfy TypeScript
         setError(
-            fieldName as Path<TFormValues>, 
-            { 
-                type: 'server', 
-                message: errorMsg 
-            }, 
-            { 
-                shouldFocus: true 
+            fieldName as Path<TFormValues>,
+            {
+                type: 'server',
+                message: errorMsg
+            },
+            {
+                shouldFocus: true
             }
         );
     });

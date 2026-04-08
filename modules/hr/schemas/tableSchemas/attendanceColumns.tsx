@@ -1,4 +1,4 @@
-import { AttendanceRead } from "@/types/attendance";
+import { AttendanceRead } from "@/modules/hr/types/attendance";
 import { ColDef } from "ag-grid-community";
 
 

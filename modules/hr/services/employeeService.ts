@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/lib/network";
-import { Employee, EmployeeWrite } from "@/types/employees";
+import { Employee, EmployeeWrite } from "@/modules/hr/types/employees";
 
 export const EmployeeService = {
     getEmployees: async () => {

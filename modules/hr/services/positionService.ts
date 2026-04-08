@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/lib/network";
-import { Position, PositionCreate, PositionUpdate } from "@/types/position";
+import { Position, PositionCreate, PositionUpdate } from "@/modules/hr/types/position";
 
 export const JobPositionService = {
     getJobPositions: async () => {
@@ -18,7 +18,7 @@ export const JobPositionService = {
         } catch (error) {
             console.error(`Error fetching job position with ID ${id}:`, error);
             throw error;
-        }   
+        }
     },
     createJobPosition: async (data: PositionCreate) => {
         try {
@@ -36,7 +36,7 @@ export const JobPositionService = {
         } catch (error) {
             console.error(`Error updating job position with ID ${id}:`, error);
             throw error;
-        }   
+        }
     },
     deleteJobPosition: async (id: string) => {
         try {

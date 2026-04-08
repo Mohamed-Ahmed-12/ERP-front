@@ -1,4 +1,4 @@
-import {Department} from "@/types/department";
+import { Department } from "@/modules/hr/types/department";
 import { ColDef } from "ag-grid-community";
 
 

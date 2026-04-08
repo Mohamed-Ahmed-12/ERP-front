@@ -64,7 +64,7 @@ axiosInstance.interceptors.response.use(
             let detail = "Server error occurred";
 
             const errorBody = responseData as ErrorData;
-            
+
             detail = errorBody.detail || errorBody.message || errorBody.error || detail;
 
             // HANDLE SPECIFIC STATUS CODES (401/403)

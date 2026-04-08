@@ -12,10 +12,10 @@ import { useAgGridFilter } from "@/hooks/useAgGridFilter";
 import { actionsColumn } from "@components/dashboard/actionsColumn";
 import FormModal from "@components/dashboard/FormModal";
 import DeleteConfirmModal from "@/components/common/DeleteConfirmModal";
-import { Employee, EmployeeWrite } from "@/types/employees";
-import { EmployeeService } from "@/services/employeeService";
-import { employeeFormFields } from "@/schemas/formSchemas/employeeForm";
-import { employeeColumns } from "@/schemas/tableSchemas/employeeColumns";
+import { Employee, EmployeeWrite } from "@/modules/hr/types/employees";
+import { EmployeeService } from "@/modules/hr/services/employeeService";
+import { employeeFormFields } from "@/modules/hr/schemas/formSchemas/employeeForm";
+import { employeeColumns } from "@/modules/hr/schemas/tableSchemas/employeeColumns";
 import { validateFile } from "@/helpers/fileValidation";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
@@ -44,47 +44,40 @@ export default function EmployeesPage() {
         setEditingEmployee(null);
     };
 
+
+
+
     const handleSubmit = async (payload: Employee) => {
         console.log("payload", payload);
 
         const formData = new FormData();
 
         // 1. Resolve relation fields to GUIDs
-        const positionId = typeof payload.position === 'object'
-            ? payload.position.guid
-            : payload.position;
-        formData.append("position", positionId);
+        // Fix: null also passes typeof === 'object', so check for null explicitly
+        const positionId =
+            payload.position !== null && typeof payload.position === 'object'
+                ? payload.position.guid
+                : payload.position;
+        if (positionId) formData.append("position", positionId);
 
-        const departmentId = typeof payload.department === 'object'
-            ? payload.department.guid
-            : payload.department;
-        formData.append("department", departmentId);
+        const departmentId =
+            payload.department !== null && typeof payload.department === 'object'
+                ? payload.department.guid
+                : payload.department;
+        if (departmentId) formData.append("department", departmentId);
 
-        const managerId = typeof payload.manager === 'object'
-            ? payload.manager?.guid ?? null
-            : payload.manager;
-        if (managerId) {
-            formData.append("manager", managerId);
-        }
+        const managerId =
+            payload.manager !== null && typeof payload.manager === 'object'
+                ? payload.manager.guid
+                : payload.manager;
+        if (managerId) formData.append("manager", managerId);
 
-        // 2. Append all scalar text fields defined in EmployeeWrite
+        // 2. Scalar text fields
         const textFields: (keyof EmployeeWrite)[] = [
-            "first_name",
-            "middle_name",
-            "last_name",
-            "national_id",
-            "phone_number",
-            "address",
-            "city",
-            "country",
-            "email",
-            "work_email",
-            "dob",
-            "date_hired",
-            "gender",
-            "marital_status",
-            "military_status",
-            "education_level",
+            "first_name", "middle_name", "last_name", "national_id",
+            "phone_number", "address", "city", "country",
+            "email", "work_email", "dob", "date_hired",
+            "gender", "marital_status", "military_status", "education_level",
         ];
 
         textFields.forEach((field) => {
@@ -94,12 +87,12 @@ export default function EmployeesPage() {
             }
         });
 
-        // 3. Nullable date field
+        // 3. Nullable date
         if (payload.contract_end_date) {
             formData.append("contract_end_date", payload.contract_end_date);
         }
 
-        // 4. Boolean field — FormData requires strings
+        // 4. Boolean
         formData.append("is_active", String(payload.is_active));
 
         // 5. Send formData to the correct service method

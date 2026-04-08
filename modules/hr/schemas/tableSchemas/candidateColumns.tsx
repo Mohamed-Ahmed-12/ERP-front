@@ -1,4 +1,4 @@
-import { CandidateRead } from "@/types/candidates";
+import { CandidateRead } from "@/modules/hr/types/candidates";
 import { ColDef } from "ag-grid-community";
 
 export const candidateColumns: (ColDef<CandidateRead>)[] = [

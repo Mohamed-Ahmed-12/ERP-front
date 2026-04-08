@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/lib/network";
-import {JobChangeRequestRead , JobChangeRequestWrite } from "@/types/jobChangeRequest";
+import { JobChangeRequestRead, JobChangeRequestWrite } from "@/modules/hr/types/jobChangeRequest";
 
 export const JobPositionChangeReqService = {
     getPositionsChangeReqs: async () => {
@@ -18,7 +18,7 @@ export const JobPositionChangeReqService = {
         } catch (error) {
             console.error(`Error fetching job position req with ID ${id}:`, error);
             throw error;
-        }   
+        }
     },
     createJobPosition: async (data: JobChangeRequestWrite) => {
         try {
@@ -36,7 +36,7 @@ export const JobPositionChangeReqService = {
         } catch (error) {
             console.error(`Error updating job position with ID ${id}:`, error);
             throw error;
-        }   
+        }
     },
     deleteJobPosition: async (id: string) => {
         try {

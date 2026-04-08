@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/lib/network";
-import { CandidateRead, CandidateWrite } from "@/types/candidates";
+import { CandidateRead, CandidateWrite } from "@/modules/hr/types/candidates";
 
 export const CandidateService = {
     getCandidates: async (): Promise<CandidateRead[]> => {
@@ -18,11 +18,11 @@ export const CandidateService = {
         } catch (error) {
             console.error(`Error fetching candidate with ID ${id}:`, error);
             throw error;
-        }   
+        }
     },
     createCandidate: async (data: FormData): Promise<CandidateRead> => {
         try {
-            const response = await axiosInstance.post("hr/candidates/", data , {
+            const response = await axiosInstance.post("hr/candidates/", data, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -35,8 +35,8 @@ export const CandidateService = {
     },
     updateCandidate: async (id: string, data: FormData) => {
         try {
-            const response = await axiosInstance.put(`hr/candidates/${id}/`, data,{
-                headers:{
+            const response = await axiosInstance.put(`hr/candidates/${id}/`, data, {
+                headers: {
                     "Content-Type": "multipart/form-data",
                 }
             });
@@ -44,7 +44,7 @@ export const CandidateService = {
         } catch (error) {
             console.error(`Error updating candidate with ID ${id}:`, error);
             throw error;
-        }   
+        }
     },
     deleteCandidate: async (id: string): Promise<void> => {
         try {

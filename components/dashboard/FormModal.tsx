@@ -30,12 +30,12 @@ export default function FormModal<TFormValues extends FieldValues>({
   editTitle = "Edit",
 }: GenericFormModalProps<TFormValues>) {
   return (
-    <Modal show={isOpen} size="5xl" dismissible  popup onClose={onClose} position="center">
-      <ModalHeader  className="p-6">
+    <Modal show={isOpen} size="5xl" dismissible popup onClose={onClose} position="center">
+      <ModalHeader className="p-6">
         <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-            {title ?? (isEditing ? editTitle : createTitle)}
-          </h3>
-        </ModalHeader>
+          {title ?? (isEditing ? editTitle : createTitle)}
+        </h3>
+      </ModalHeader>
       <ModalBody>
         <div className="space-y-6">
 

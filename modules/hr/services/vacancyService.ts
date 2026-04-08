@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/lib/network";
-import { VacancyWrite, VacancyRead } from "@/types/vacancies";
+import { VacancyWrite, VacancyRead } from "@/modules/hr/types/vacancies";
 export const VacancyService = {
     getVacancies: async () => {
         try {
@@ -17,7 +17,7 @@ export const VacancyService = {
         } catch (error) {
             console.error(`Error fetching vacancy with ID ${id}:`, error);
             throw error;
-        }   
+        }
     },
     createVacancy: async (data: VacancyWrite) => {
         try {
@@ -35,7 +35,7 @@ export const VacancyService = {
         } catch (error) {
             console.error(`Error updating vacancy with ID ${id}:`, error);
             throw error;
-        }   
+        }
     },
     deleteVacancy: async (id: string) => {
         try {
