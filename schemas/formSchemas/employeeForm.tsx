@@ -98,5 +98,12 @@ export const employeeFormFields: FormFieldGroup[] = [
             { id: 'id_front', label: 'ID Front Side', fieldType: 'file', required: false, placeholder: '', },
             { id: 'id_back', label: 'ID Back Side', fieldType: 'file', required: false, placeholder: '', },
         ]
+    },
+    {
+        groupKey: 'active',
+        fields: [
+            { id: 'is_active', label: 'Active', fieldType: 'checkbox', required: false, placeholder: '', },
+        ]
+
     }
 ];

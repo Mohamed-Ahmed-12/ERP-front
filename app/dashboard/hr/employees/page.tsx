@@ -12,10 +12,11 @@ import { useAgGridFilter } from "@/hooks/useAgGridFilter";
 import { actionsColumn } from "@components/dashboard/actionsColumn";
 import FormModal from "@components/dashboard/FormModal";
 import DeleteConfirmModal from "@/components/common/DeleteConfirmModal";
-import { Employee } from "@/types/employees";
+import { Employee, EmployeeWrite } from "@/types/employees";
 import { EmployeeService } from "@/services/employeeService";
 import { employeeFormFields } from "@/schemas/formSchemas/employeeForm";
 import { employeeColumns } from "@/schemas/tableSchemas/employeeColumns";
+import { validateFile } from "@/helpers/fileValidation";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -44,15 +45,72 @@ export default function EmployeesPage() {
     };
 
     const handleSubmit = async (payload: Employee) => {
-        if (editingEmployee) {
-            await EmployeeService.updateEmployee(editingEmployee.guid, payload);
-            toast.success("Updated successfully");
+        console.log("payload", payload);
 
-        } else {
-            await EmployeeService.createEmployee(payload);
-            toast.success("Created successfully");
+        const formData = new FormData();
 
+        // 1. Resolve relation fields to GUIDs
+        const positionId = typeof payload.position === 'object'
+            ? payload.position.guid
+            : payload.position;
+        formData.append("position", positionId);
+
+        const departmentId = typeof payload.department === 'object'
+            ? payload.department.guid
+            : payload.department;
+        formData.append("department", departmentId);
+
+        const managerId = typeof payload.manager === 'object'
+            ? payload.manager?.guid ?? null
+            : payload.manager;
+        if (managerId) {
+            formData.append("manager", managerId);
         }
+
+        // 2. Append all scalar text fields defined in EmployeeWrite
+        const textFields: (keyof EmployeeWrite)[] = [
+            "first_name",
+            "middle_name",
+            "last_name",
+            "national_id",
+            "phone_number",
+            "address",
+            "city",
+            "country",
+            "email",
+            "work_email",
+            "dob",
+            "date_hired",
+            "gender",
+            "marital_status",
+            "military_status",
+            "education_level",
+        ];
+
+        textFields.forEach((field) => {
+            const value = payload[field as keyof Employee];
+            if (value !== undefined && value !== null) {
+                formData.append(field, String(value));
+            }
+        });
+
+        // 3. Nullable date field
+        if (payload.contract_end_date) {
+            formData.append("contract_end_date", payload.contract_end_date);
+        }
+
+        // 4. Boolean field — FormData requires strings
+        formData.append("is_active", String(payload.is_active));
+
+        // 5. Send formData to the correct service method
+        if (editingEmployee) {
+            await EmployeeService.updateEmployee(editingEmployee.guid, formData);
+            toast.success("Updated successfully");
+        } else {
+            await EmployeeService.createEmployee(formData);
+            toast.success("Created successfully");
+        }
+
         await refetch();
         closeFormModal();
         return payload;
